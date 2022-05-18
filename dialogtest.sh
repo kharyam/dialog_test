@@ -22,12 +22,12 @@ COUNT=10
 (
 while test $COUNT != 110
 do
-echo $COUNT
-echo "XXX"
-echo "Selection: $selection - Progress: $COUNT percent"
-echo "XXX"
-COUNT=`expr $COUNT + 10`
-sleep 1
+  echo $COUNT
+  echo "XXX"
+  echo "Selection: $selection - Progress: $COUNT percent"
+  echo "XXX"
+  COUNT=`expr $COUNT + 10`
+  sleep 1
 done
 ) |
 $dialog_command --title "My Gauge" --gauge "Hi, this is a gauge widget" 6 70 0
