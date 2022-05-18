@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-common_options='--title "MyTUI"'
+common_options='--backtitle MyTUI'
 #dialog_command=Xdialog
-dialog_command="dialog"
+dialog_command="dialog $common_options"
 
-$dialog_command --erase-on-exit --yesno "Proceed?" 6 80
+$dialog_command --erase-on-exit --yesno "Proceed?" 6 30
 
 exec 3>&1;
 selection=$($dialog_command --checklist "Select Stuff" 30 80 24 \
@@ -18,16 +18,16 @@ selection=$($dialog_command --checklist "Select Stuff" 30 80 24 \
 
 exitcode=$?
 
-COUNT=10
+COUNT=1
 (
-while test $COUNT != 110
+while [[ $COUNT -le 100 ]]
 do
   echo $COUNT
   echo "XXX"
   echo "Selection: $selection - Progress: $COUNT percent"
   echo "XXX"
-  COUNT=`expr $COUNT + 10`
-  sleep 1
+  COUNT=`expr $COUNT + 1`
+  sleep .05
 done
 ) |
-$dialog_command --title "My Gauge" --gauge "Hi, this is a gauge widget" 6 70 0
+$dialog_command --erase-on-exit --gauge "Hi, this is a gauge widget" 6 70 0
